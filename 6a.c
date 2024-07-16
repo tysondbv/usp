@@ -1,21 +1,16 @@
 #include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
 #include<fcntl.h>
-#include<dirent.h>
-#include<sys/stat.h>
+#include<stdlib.h>
+#include<unistd.h>
 
-int main(){
-  DIR *dir;
-  struct dirent *entry;
-  struct stat fs;
-  dir = opendir(".");
-  while((entry=readdir(dir))!=NULL){
-    stat(entry->d_name,&fs);
-    if(fs.st_size==0){
-    printf("empty files are :%s",entry->d_name);
-    remove(entry->d_name);
-    }
-  }
-return 0;
+int main()
+{
+        int fd = open("5a.txt",O_RDWR);
+        char buffer[5];
+        read(fd,buffer,5);
+        buffer[5] = '\0';
+        lseek(fd,0,SEEK_END);
+        int fd1 =0;
+        dup2(fd,fd1);
+        write(fd,buffer,5);
 }
